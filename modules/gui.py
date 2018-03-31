@@ -17,7 +17,7 @@ def Init(res):
     screen.res = res
     screen.zoom_mode = 0
     screen.car_size = res[0]/50
-    pygame.display.set_caption('PyRoSim')
+    pygame.display.set_caption('PyIoTsim')
     pygame.font.init()
     return screen
     
@@ -37,7 +37,7 @@ def InitMultiscreen(res,screens):
     screen.car_size = res[0]/50
     screen.mesh = pygame.Surface(screen.res)
     screen.mesh.fill((255, 255, 255))
-    pygame.display.set_caption('PyRoSim')
+    pygame.display.set_caption('PyIoTsim')
     pygame.font.init()
     # Init subscreens
     screen.subscreen = []
@@ -115,10 +115,25 @@ def DrawLine(screen, x1, y1, x2, y2, color=(0, 0, 0), width=1):
     # Draw line on screen
     if width > 1: pygame.draw.line(screen.surface, color, (x1, y1), (x2, y2), width)
     else: pygame.draw.aaline(screen.surface, color, (x1, y1), (x2, y2), 1)
+    
+def DrawImage(screen, image, x1=None, y1=None, x2=None, y2=None):
+    # Draw image on screen
+    if (x1 == None) and (y1 == None) and (x2 == None) and (y2 == None):
+        x1 = 0; y1 = 0; x2 = screen.res[0]; y2 = screen.res[1]
+    image = pygame.transform.scale(image, (x2-x1, y2-y1))
+    screen.surface.blit(image, (x1,y1))
+    
+def LoadImage(path):
+    # Load image from file
+    return pygame.image.load(path)
 
 def DrawPolygon(screen, points, color=(0, 0, 0), width=0):
     # Draw polygon on screen
     pygame.draw.polygon(screen.surface, color, points, width)
+    
+def DrawSurface(screen,surface,x=0,y=0):
+    # Draw surface on screen
+    screen.surface.blit(surface,(x,y))
     
 def DrawCar(screen, car, navigator = None, color=(0, 0, 0)):
     # Draw car on screen
@@ -418,6 +433,30 @@ def ShowSimulation(screen, simulator):
     pygame.display.flip()
     return 1
     
+def MousePosition(screen):
+    return pygame.mouse.get_pos()
+    
+def CaptureClick(screen):
+    # Screen refresh
+    pygame.display.flip()
+    # Handle events
+    while 1:
+        # get event from event poll
+        event = pygame.event.poll()
+        # stop handling if event poll is empty
+        if event.type == pygame.NOEVENT:
+            return 1
+        # capture mouse clicks
+        if event.type == pygame.MOUSEBUTTONUP:
+            return pygame.mouse.get_pos()
+        # return 0 if exit button is pressed
+        if event.type == pygame.QUIT:
+            return 0
+        # Return 0 if ESC is pressed
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                return 0
+    
 def Refresh(screen):
     # Screen refresh
     pygame.display.flip()
@@ -489,3 +528,7 @@ def ShowMultiScreen(screen):
                         # right button
                         if event.button == 3:
                             return -s.id
+                            
+def CloseScreen(screen):
+    pygame.font.quit()
+    pygame.quit()

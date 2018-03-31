@@ -4,7 +4,7 @@
 
 res = (500,500) # screen resolution
 simstep = 0.02 # basic simulation step in seconds
-deffile = "default_track.nft" # default track file
+deffile = "default.track" # default track file
 zoomin = 4 # zoom in parameter
 zoomout = 0.7 # zoom out parameter
 
