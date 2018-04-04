@@ -72,12 +72,26 @@ class Track():
     # Load track from file
     def loadFromFile(self,filename):
         with open(filename) as f:
+            #read file
             lines = [line for line in f]
-            #....TODO
-            self.map = #TODO
-            self.cams = #TODO
-            self.point = [struct(x=float(line[0]),y=float(line[1]),width=10) for line in data]
-            self.filename = filename
+            #get map image filename
+            self.mapfile = lines[1].strip()
+            #get map resolution
+            self.res = [int(dim) for dim in lines[3].split()]
+            #read track points
+            self.point = []
+            i=5
+            while True:
+                if lines[i][0] == "#": break
+                coords = lines[i].split()
+                self.point.append(struct(x=int(coords[0]),y=int(coords[1]),width=10))
+                i+=1
+            #read cameras
+            self.cams = []
+            i=i+1
+            for line in lines[i:]:
+                if line == "": break 
+                self.cams.append([int(coord) for coord in line.split()])
     # Calculate gate parameters
     def calculateGates(self):
         left_right_switch = 0

@@ -135,7 +135,7 @@ def DrawSurface(screen,surface,x=0,y=0):
     # Draw surface on screen
     screen.surface.blit(surface,(x,y))
     
-def DrawCar(screen, car, navigator = None, color=(0, 0, 0)):
+def DrawCar(screen, car, navigator = None, color=(0, 0, 255)):
     # Draw car on screen
     if screen.zoom_mode == 0:
         # Normal mode draw
@@ -152,6 +152,18 @@ def DrawCar(screen, car, navigator = None, color=(0, 0, 0)):
         R_y = int(round(car.y_pos + 0.4 * screen.car_size * sin(radian)))
         DrawPolygon(screen,[[L_x,L_y], [R_x,R_y], [F_x,F_y]], color)
         if (navigator != None):
+            C_x = int(round(navigator.car.x_pos-11))
+            C_y = int(round(navigator.car.y_pos))
+            radian = navigator.car.direction*degree_to_radian
+            F_x = int(round(navigator.car.x_pos-11 + screen.car_size * cos(radian)))
+            F_y = int(round(navigator.car.y_pos + screen.car_size * sin(radian)))
+            radian = ((navigator.car.direction+90)%360) * degree_to_radian
+            L_x = int(round(navigator.car.x_pos-11 + 0.4 * screen.car_size * cos(radian)))
+            L_y = int(round(navigator.car.y_pos + 0.4 * screen.car_size * sin(radian)))
+            radian = ((navigator.car.direction+270)%360) * degree_to_radian
+            R_x = int(round(navigator.car.x_pos-11 + 0.4 * screen.car_size * cos(radian)))
+            R_y = int(round(navigator.car.y_pos + 0.4 * screen.car_size * sin(radian)))
+            DrawPolygon(screen,[[L_x,L_y], [R_x,R_y], [F_x,F_y]], color=[channel//2 for channel in color])
             next = navigator.next_gate
             G_x = int(round(navigator.track.point[next].x))
             G_y = int(round(navigator.track.point[next].y))
@@ -231,25 +243,16 @@ def DrawTrack(screen, track, car, navigator):
         # Normal mode draw
         if DrawTrack.surface_normal == None:
             DrawTrack.surface_normal = pygame.Surface(screen.surface.get_size())
-            DrawTrack.surface_normal.fill((255, 255, 255))
-            count = len(track.gate)
-            for current in range(0,count):
-                next = (current + 1) % count
-                x1 = int(round(track.gate[current].left_x))
-                y1 = int(round(track.gate[current].left_y))
-                x2 = int(round(track.gate[next].left_x))
-                y2 = int(round(track.gate[next].left_y))
-                pygame.draw.aaline(DrawTrack.surface_normal, (255, 0, 0), (x1, y1), (x2, y2))
-                x1 = int(round(track.gate[current].right_x))
-                y1 = int(round(track.gate[current].right_y))
-                x2 = int(round(track.gate[next].right_x))
-                y2 = int(round(track.gate[next].right_y))
-                pygame.draw.aaline(DrawTrack.surface_normal, (255, 0, 0), (x1, y1), (x2, y2))
-            x1 = int(round(track.gate[navigator.start_gate].left_x))
-            y1 = int(round(track.gate[navigator.start_gate].left_y))
-            x2 = int(round(track.gate[navigator.start_gate].right_x))
-            y2 = int(round(track.gate[navigator.start_gate].right_y))
-            pygame.draw.line(DrawTrack.surface_normal, (0, 255, 0), (x1, y1), (x2, y2),3)
+            image = LoadImage(track.mapfile)
+            image = pygame.transform.scale(image, track.res)
+            DrawTrack.surface_normal.blit(image, (0,0))
+            for point in track.point:
+                pygame.draw.circle(DrawTrack.surface_normal, (0,180,0), (point.x,point.y), 2)
+            for cam in track.cams:
+                pygame.draw.circle(DrawTrack.surface_normal, (255,0,0), (cam[0],cam[1]), 2)
+                pygame.draw.aaline(DrawTrack.surface_normal, (255, 0, 0), (cam[0],cam[1]), (cam[2],cam[3]))
+                pygame.draw.aaline(DrawTrack.surface_normal, (255, 0, 0), (cam[0],cam[1]), (cam[4],cam[5]))
+                pygame.draw.aaline(DrawTrack.surface_normal, (255, 255, 0), (cam[2],cam[3]), (cam[4],cam[5]))
         screen.surface.blit(DrawTrack.surface_normal,(0,0))
     elif screen.zoom_mode == 1:
         # zoomin mode draw
@@ -259,8 +262,8 @@ def DrawTrack(screen, track, car, navigator):
             DrawTrack.surface_zoom = pygame.Surface((width, height))
             DrawTrack.surface_zoom.fill((255, 255, 255))
             count = len(track.gate)
-            for current in range(0,count):
-                next = (current + 1) % count
+            for current in range(0,count-1):
+                next = current + 1
                 x1 = int(round(zoomin*track.gate[current].left_x))
                 y1 = int(round(zoomin*track.gate[current].left_y))
                 x2 = int(round(zoomin*track.gate[current].right_x))
@@ -290,8 +293,8 @@ def DrawTrack(screen, track, car, navigator):
             DrawTrack.surface_resized = pygame.Surface((width, height))
             DrawTrack.surface_resized.fill((255, 255, 255))
             count = len(track.gate)
-            for current in range(0,count):
-                next = (current + 1) % count
+            for current in range(0,count-1):
+                next = current + 1
                 x1 = int(round(zoomout*track.gate[current].left_x))
                 y1 = int(round(zoomout*track.gate[current].left_y))
                 x2 = int(round(zoomout*track.gate[next].left_x))
@@ -397,6 +400,10 @@ def HandleEvents(screen,car):
         # return 0 if exit button is pressed
         if event.type == pygame.QUIT:
             return 0
+        # return 0 if ESC is pressed
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                return 0
         # handle car speed and turn parameters
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:

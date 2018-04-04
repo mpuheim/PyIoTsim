@@ -1,4 +1,4 @@
-load file - draw track
+train - numpy support
 
 
 - simulation objects: cams, navigator, robot

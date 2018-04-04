@@ -7,10 +7,10 @@ from modules import simulation, gui
 from modules.utils import struct
 from modules.config import res,simstep
 
-# init gui screen
-screen = gui.Init(res)
 # init track
 track = simulation.Track("default.track")
+# init gui screen
+screen = gui.Init(res)
 # set initial car position
 start = 0
 x = track.point[start].x
@@ -19,7 +19,7 @@ angle = track.gate[start].angle-110
 # init car
 car = simulation.Car(x_pos=x, y_pos=y, direction=angle)
 # init navigator
-navdist = 40
+navdist = 30
 stopdist = 100
 navigator = simulation.Navigator(track, car, start, navdist, stopdist)
 # init controller
@@ -35,4 +35,10 @@ while (run):
     simulator.runSimulationStep()
     # refresh gui screen
     run = gui.ShowSimulation(screen, simulator)
-    
+    # reset simulator on finish
+    if navigator.lost or navigator.finished:
+        car = simulation.Car(x_pos=x, y_pos=y, direction=angle)
+        navigator = simulation.Navigator(track, car, start, navdist, stopdist)
+        controller = simulation.SimpleController()
+        timer = simulation.Timer()
+        simulator = simulation.Simulator(track, car, navigator, controller, timer)

@@ -30,7 +30,7 @@ while True:
     track.append(click)
     print(click)
     # show track on map
-    gui.DrawDot(screen, click[0], click[1], size=2)
+    gui.DrawDot(screen, click[0], click[1], size=2, color=(0, 180, 0))
     if len(track)>1:
         gui.DrawLine(screen, track[-1][0], track[-1][1], track[-2][0], track[-2][1])
         

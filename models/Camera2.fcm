@@ -1,0 +1,1337 @@
+{
+    "py/object": "fcmlib.fcm.FCM",
+    "CamX": {
+        "py/object": "fcmlib.fcm.Concept",
+        "error": 0,
+        "inputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x/500"
+        },
+        "name": "CamX",
+        "newError": {
+            "py/object": "numpy.float64",
+            "dtype": "float64",
+            "value": -14.562928185277332
+        },
+        "newValue": 0.9386381293462497,
+        "outputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x*500"
+        },
+        "relation": null,
+        "value": 0.9386381293462497
+    },
+    "CamY": {
+        "py/object": "fcmlib.fcm.Concept",
+        "error": 0,
+        "inputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x/500"
+        },
+        "name": "CamY",
+        "newError": {
+            "py/object": "numpy.float64",
+            "dtype": "float64",
+            "value": -29.60846487802222
+        },
+        "newValue": 0.49435947499655475,
+        "outputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x*500"
+        },
+        "relation": null,
+        "value": 0.49435947499655475
+    },
+    "Confidence": {
+        "py/object": "fcmlib.fcm.Concept",
+        "error": 0,
+        "inputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x"
+        },
+        "name": "Confidence",
+        "newError": 0,
+        "newValue": 0.0077247901097612015,
+        "outputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x"
+        },
+        "relation": null,
+        "value": 0.0077247901097612015
+    },
+    "Detection": {
+        "py/object": "fcmlib.fcm.Concept",
+        "error": 0,
+        "inputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x"
+        },
+        "name": "Detection",
+        "newError": {
+            "py/object": "numpy.float64",
+            "dtype": "float64",
+            "value": -14.52978601773529
+        },
+        "newValue": 0.0,
+        "outputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x"
+        },
+        "relation": null,
+        "value": 0.0
+    },
+    "OutputX": {
+        "py/object": "fcmlib.fcm.Concept",
+        "error": 0,
+        "inputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x/500"
+        },
+        "name": "OutputX",
+        "newError": 0,
+        "newValue": 0.8884521143008527,
+        "outputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x*500"
+        },
+        "relation": null,
+        "value": 0.8884521143008527
+    },
+    "OutputY": {
+        "py/object": "fcmlib.fcm.Concept",
+        "error": 0,
+        "inputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x/500"
+        },
+        "name": "OutputY",
+        "newError": 0,
+        "newValue": 0.5122628696408205,
+        "outputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "x*500"
+        },
+        "relation": null,
+        "value": 0.5122628696408205
+    },
+    "__dict__": {
+        "config": {
+            "py/object": "fcmlib.config.Config",
+            "defaultInputMF": {
+                "py/type": "fcmlib.functions.predefined.Predefined"
+            },
+            "defaultOutputMF": {
+                "py/type": "fcmlib.functions.predefined.Predefined"
+            },
+            "defaultRelation": {
+                "py/type": "fcmlib.relations.neural.RNeural"
+            },
+            "functions": {
+                "py/repr": "fcmlib.functions/fcmlib.functions"
+            },
+            "relations": {
+                "py/repr": "fcmlib.relations/fcmlib.relations"
+            }
+        },
+        "name": "Camera2",
+        "relations": {
+            "CamX": {
+                "py/object": "fcmlib.relations.neural.RNeural",
+                "activations": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [],
+                        "shape": [
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0
+                        ]
+                    }
+                ],
+                "deltas": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [],
+                        "shape": [
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0
+                        ]
+                    }
+                ],
+                "errors": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [],
+                        "shape": [
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0
+                        ]
+                    }
+                ],
+                "previous": [],
+                "previousnames": [],
+                "weights": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [],
+                            [],
+                            [],
+                            []
+                        ],
+                        "shape": [
+                            4,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.2792529858224022,
+                                -0.5213165769609387,
+                                0.38287964417604603,
+                                -0.45975255260823156
+                            ],
+                            [
+                                -0.8801878729469561,
+                                -0.5868573632874259,
+                                -0.39112617028815744,
+                                -0.3464094120344592
+                            ],
+                            [
+                                0.07195526980312006,
+                                0.3436754075244799,
+                                0.3744162483781879,
+                                -0.4362374950991763
+                            ],
+                            [
+                                0.11524865408909579,
+                                -0.3372456545521143,
+                                0.9333293684432067,
+                                -0.18120167275675492
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.09840594371878653,
+                                0.29556567117838695,
+                                0.625704939319242,
+                                0.7822783115811343
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "CamY": {
+                "py/object": "fcmlib.relations.neural.RNeural",
+                "activations": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [],
+                        "shape": [
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0
+                        ]
+                    }
+                ],
+                "deltas": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [],
+                        "shape": [
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0
+                        ]
+                    }
+                ],
+                "errors": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [],
+                        "shape": [
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0
+                        ]
+                    }
+                ],
+                "previous": [],
+                "previousnames": [],
+                "weights": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [],
+                            [],
+                            [],
+                            []
+                        ],
+                        "shape": [
+                            4,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.6059013182027253,
+                                -0.7644191106037492,
+                                -0.6929306028267894,
+                                -0.29553662137985426
+                            ],
+                            [
+                                -0.7639644322109402,
+                                0.5477542259503876,
+                                0.8377043440640035,
+                                0.6571841833277066
+                            ],
+                            [
+                                -0.4966489949052162,
+                                -0.5060338027417808,
+                                -0.32964067751583737,
+                                0.6218587377650977
+                            ],
+                            [
+                                0.9764736425738902,
+                                0.27266026749037287,
+                                0.37062594513155256,
+                                0.7258170310888385
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.4839817547498124,
+                                -0.956306907253017,
+                                0.7941147681869092,
+                                -0.6006948397263259
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Confidence": {
+                "py/object": "fcmlib.relations.neural.RNeural",
+                "activations": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.0,
+                                0.9386381293462497,
+                                0.49435947499655475
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.8275633115670614,
+                                0.7448118924764375,
+                                0.4764407461999804,
+                                0.36645979974727527
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.9245168786101186,
+                                0.8213382307988489,
+                                0.5535311557766216,
+                                0.20134275404834978
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.0077247901097612015
+                            ]
+                        ]
+                    }
+                ],
+                "deltas": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.0,
+                                1.120727733620171e-05,
+                                -2.632300712239308e-06
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                7.082289930011328e-05,
+                                -5.06193345580551e-05,
+                                4.480164862032429e-05,
+                                2.1532478942674853e-05
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                4.023684461641007e-05,
+                                2.422793707585777e-05,
+                                -3.083624915440605e-05,
+                                -6.108293295305518e-05
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -8.94694194985394e-05
+                            ]
+                        ]
+                    }
+                ],
+                "errors": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.0005399826913268389,
+                                4.906243229237449e-05,
+                                -1.0534497718955701e-05
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.0003211743985556064,
+                                -0.0002277680910165048,
+                                0.00018012310496839386,
+                                9.095077674851394e-05
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.00047579467990636263,
+                                0.00016312136768850807,
+                                -0.0001252035149868257,
+                                -0.0003483823744448819
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            -0.009504099372515805
+                        ]
+                    }
+                ],
+                "previous": [
+                    {
+                        "py/id": 12
+                    },
+                    {
+                        "py/id": 1
+                    },
+                    {
+                        "py/id": 5
+                    }
+                ],
+                "previousnames": [
+                    "Detection",
+                    "CamX",
+                    "CamY"
+                ],
+                "weights": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -4.1536538020367075,
+                                1.4670620990880832,
+                                0.387198088850273
+                            ],
+                            [
+                                1.2184698881064475,
+                                0.6716759264378727,
+                                0.8913961005607518
+                            ],
+                            [
+                                -3.1460211075530573,
+                                -0.3893833170296052,
+                                0.5485546318859774
+                            ],
+                            [
+                                -2.0055200966379934,
+                                -0.1574740854874004,
+                                -0.8083661099285943
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                3.9589355177176464,
+                                -2.9630938997049996,
+                                2.3287844006182916,
+                                0.8909906203094144
+                            ],
+                            [
+                                1.4670587954108274,
+                                -1.2567766153157982,
+                                1.382594061430194,
+                                1.6064368487829548
+                            ],
+                            [
+                                -0.23804643193356503,
+                                0.3582979734214121,
+                                0.383480354026049,
+                                -0.10266704578296497
+                            ],
+                            [
+                                -1.9481658634603425,
+                                1.0975288349676842,
+                                -1.0600596476097288,
+                                -0.21309158833937847
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -5.318039848414885,
+                                -1.823281305483446,
+                                1.3993499193975554,
+                                3.8938506736167877
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Detection": {
+                "py/object": "fcmlib.relations.neural.RNeural",
+                "activations": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [],
+                        "shape": [
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0
+                        ]
+                    }
+                ],
+                "deltas": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [],
+                        "shape": [
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0
+                        ]
+                    }
+                ],
+                "errors": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [],
+                        "shape": [
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0,
+                            0,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "int32",
+                        "values": [
+                            0
+                        ]
+                    }
+                ],
+                "previous": [],
+                "previousnames": [],
+                "weights": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [],
+                            [],
+                            [],
+                            []
+                        ],
+                        "shape": [
+                            4,
+                            0
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.39334504676978965,
+                                -0.044418221646285394,
+                                0.3107999856647441,
+                                -0.9516544390959618
+                            ],
+                            [
+                                0.8742951174849289,
+                                -0.413866311535507,
+                                -0.19017235607969507,
+                                -0.8378187653061435
+                            ],
+                            [
+                                0.21801579913065083,
+                                0.6564147176507793,
+                                0.33437933083002447,
+                                -0.629763307901384
+                            ],
+                            [
+                                0.11334679551882032,
+                                -0.9287437238491871,
+                                0.416488718108301,
+                                -0.695686098535333
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.6459067457452099,
+                                -0.29628303625681385,
+                                -0.06502200726717633,
+                                -0.4412779580698485
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "OutputX": {
+                "py/object": "fcmlib.relations.neural.RNeural",
+                "activations": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.0,
+                                0.9386381293462497,
+                                0.49435947499655475
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.7824457597996379,
+                                0.7564521457402276,
+                                0.273120444956804,
+                                0.2152952845176799
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.24325069821701079,
+                                0.7118032268674193,
+                                0.42114534944428417,
+                                0.4360070356982643
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.8884521143008527
+                            ]
+                        ]
+                    }
+                ],
+                "deltas": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.0,
+                                0.005140630768954303,
+                                8.699695536838808e-05
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.004435710286520951,
+                                0.0018511470151782962,
+                                -0.007721178219099341,
+                                -0.004657152760784868
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.0012341903469008132,
+                                0.006016875749648498,
+                                -0.004098042805234485,
+                                0.000858363564962974
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.004446207259583988
+                            ]
+                        ]
+                    }
+                ],
+                "errors": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.00037279101255895987,
+                                0.022504292655203924,
+                                0.0003481628157539537
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.018935019132414105,
+                                0.008023370041344718,
+                                -0.031220257904033172,
+                                -0.020897068205050745
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.005491108973715525,
+                                0.024259668514892033,
+                                -0.0195976222068942,
+                                0.0035079119693542187
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            0.020014508162899625
+                        ]
+                    }
+                ],
+                "previous": [
+                    {
+                        "py/id": 12
+                    },
+                    {
+                        "py/id": 1
+                    },
+                    {
+                        "py/id": 5
+                    }
+                ],
+                "previousnames": [
+                    "Detection",
+                    "CamX",
+                    "CamY"
+                ],
+                "weights": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.5610801753385563,
+                                1.3102782992523163,
+                                0.10134170495828716
+                            ],
+                            [
+                                -0.8601546174548735,
+                                0.9730227642146239,
+                                0.4450396275279745
+                            ],
+                            [
+                                -0.4403882545660186,
+                                -1.297389985931136,
+                                0.4833159266765819
+                            ],
+                            [
+                                -0.22621902814386527,
+                                -1.05441241815466,
+                                -0.6140982459097367
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -1.5499748605796952,
+                                -0.33641368710541597,
+                                0.3178772308974978,
+                                1.1402660718288333
+                            ],
+                            [
+                                2.0492088999577,
+                                0.5580635793284857,
+                                -2.789532000197727,
+                                -1.66983204889621
+                            ],
+                            [
+                                -1.217319482003726,
+                                -1.0234481798623551,
+                                3.2824129791988614,
+                                2.378633409914408
+                            ],
+                            [
+                                -0.30505328659193437,
+                                0.10664349254513837,
+                                -0.6610677096503966,
+                                0.37708518509121597
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -1.2334929206757823,
+                                5.458286525349264,
+                                -4.404594556413446,
+                                0.7908664814348108
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "OutputY": {
+                "py/object": "fcmlib.relations.neural.RNeural",
+                "activations": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.0,
+                                0.9386381293462497,
+                                0.49435947499655475
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.5227933947934504,
+                                0.6835454096177039,
+                                0.33119294640917424,
+                                0.29796654108255155
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.7298344617667244,
+                                0.37792599986910064,
+                                0.8063363278553258,
+                                0.6064588056692606
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.5122628696408205
+                            ]
+                        ]
+                    }
+                ],
+                "deltas": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.0,
+                                -8.479107847264687e-05,
+                                -0.011491190949330944
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.005250273357257927,
+                                -0.007355329646982353,
+                                0.014445574962847547,
+                                0.007681623042295978
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.008237257896180794,
+                                0.0063124372026734776,
+                                -0.003464920046741108,
+                                -0.0082935238243702
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.008918466716969485
+                            ]
+                        ]
+                    }
+                ],
+                "errors": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.0013135849226452879,
+                                -0.0003711924334310751,
+                                -0.04598787831532751
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -0.022488772795714748,
+                                -0.03446922766586067,
+                                0.06440224896623173,
+                                0.0345982895765235
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.04145651027666874,
+                                0.026750090644922148,
+                                -0.0242239784386084,
+                                -0.035299258797301586
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            -0.03599468696944741
+                        ]
+                    }
+                ],
+                "previous": [
+                    {
+                        "py/id": 12
+                    },
+                    {
+                        "py/id": 1
+                    },
+                    {
+                        "py/id": 5
+                    }
+                ],
+                "previousnames": [
+                    "Detection",
+                    "CamX",
+                    "CamY"
+                ],
+                "weights": [
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                0.5990208143652996,
+                                -0.696099465755829,
+                                1.5062365620571327
+                            ],
+                            [
+                                0.3330734476881159,
+                                -0.011656963954578395,
+                                1.579933316161259
+                            ],
+                            [
+                                -0.24581586075505518,
+                                -0.10959036204178552,
+                                -1.2135476734297617
+                            ],
+                            [
+                                1.0196093331228941,
+                                -0.31310895499963937,
+                                -1.1390574832449873
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -1.1690823865996647,
+                                -0.7121514958802276,
+                                4.0676113116728425,
+                                2.4989219454292613
+                            ],
+                            [
+                                -0.11193964088721549,
+                                -2.1248690384130935,
+                                2.2316792690489624,
+                                0.9178503752320024
+                            ],
+                            [
+                                1.2378051116815796,
+                                1.246343513962091,
+                                -0.08250191575390707,
+                                -0.1521873617288374
+                            ],
+                            [
+                                0.9338308852033063,
+                                1.295126182023376,
+                                -2.000008248982628,
+                                -0.935133502220124
+                            ]
+                        ]
+                    },
+                    {
+                        "py/object": "numpy.ndarray",
+                        "dtype": "float64",
+                        "values": [
+                            [
+                                -4.654869155889667,
+                                -3.002807824987829,
+                                2.708783499617445,
+                                3.9524429843257907
+                            ]
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
