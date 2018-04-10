@@ -99,3 +99,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# windows
+**/desktop.ini
+
