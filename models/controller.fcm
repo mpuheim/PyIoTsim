@@ -1,0 +1,316 @@
+{
+    "py/object": "fcmlib.fcm.FCM",
+    "Acceleration": {
+        "py/object": "fcmlib.fcm.Concept",
+        "error": 0,
+        "inputMF": {
+            "py/object": "fcmlib.functions.piecewiselinear.PiecewiseLinear",
+            "piece": []
+        },
+        "name": "Acceleration",
+        "newError": 0,
+        "newValue": 0.42996379258023404,
+        "outputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "20*(x-0.5)"
+        },
+        "relation": null,
+        "value": 0.42996379258023404
+    },
+    "Angle": {
+        "py/object": "fcmlib.fcm.Concept",
+        "error": 0,
+        "inputMF": {
+            "py/object": "fcmlib.functions.piecewiselinear.PiecewiseLinear",
+            "piece": [
+                {
+                    "py/object": "fcmlib.functions.piecewiselinear.Piece",
+                    "a": -0.0,
+                    "b": 0.0,
+                    "end": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": -90.0,
+                        "y": 0.0
+                    },
+                    "start": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": -91.0,
+                        "y": 0.0
+                    }
+                },
+                {
+                    "py/object": "fcmlib.functions.piecewiselinear.Piece",
+                    "a": 0.005555555555555556,
+                    "b": 0.5,
+                    "end": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": 90.0,
+                        "y": 1.0
+                    },
+                    "start": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": -90.0,
+                        "y": 0.0
+                    }
+                },
+                {
+                    "py/object": "fcmlib.functions.piecewiselinear.Piece",
+                    "a": -0.0,
+                    "b": 1.0,
+                    "end": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": 91.0,
+                        "y": 1.0
+                    },
+                    "start": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": 90.0,
+                        "y": 1.0
+                    }
+                }
+            ]
+        },
+        "name": "Angle",
+        "newError": 0,
+        "newValue": 0.22139406675149553,
+        "outputMF": {
+            "py/object": "fcmlib.functions.piecewiselinear.PiecewiseLinear",
+            "piece": []
+        },
+        "relation": null,
+        "value": 0.22139406675149553
+    },
+    "Distance": {
+        "py/object": "fcmlib.fcm.Concept",
+        "error": 0,
+        "inputMF": {
+            "py/object": "fcmlib.functions.piecewiselinear.PiecewiseLinear",
+            "piece": [
+                {
+                    "py/object": "fcmlib.functions.piecewiselinear.Piece",
+                    "a": -0.0,
+                    "b": 0.0,
+                    "end": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": 0.0,
+                        "y": 0.0
+                    },
+                    "start": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": -1.0,
+                        "y": 0.0
+                    }
+                },
+                {
+                    "py/object": "fcmlib.functions.piecewiselinear.Piece",
+                    "a": 0.025,
+                    "b": 0.0,
+                    "end": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": 40.0,
+                        "y": 1.0
+                    },
+                    "start": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": 0.0,
+                        "y": 0.0
+                    }
+                },
+                {
+                    "py/object": "fcmlib.functions.piecewiselinear.Piece",
+                    "a": -0.0,
+                    "b": 1.0,
+                    "end": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": 41.0,
+                        "y": 1.0
+                    },
+                    "start": {
+                        "py/object": "fcmlib.functions.piecewiselinear.Point",
+                        "x": 40.0,
+                        "y": 1.0
+                    }
+                }
+            ]
+        },
+        "name": "Distance",
+        "newError": 0,
+        "newValue": 0.6257073899564024,
+        "outputMF": {
+            "py/object": "fcmlib.functions.piecewiselinear.PiecewiseLinear",
+            "piece": []
+        },
+        "relation": null,
+        "value": 0.6257073899564024
+    },
+    "Turn": {
+        "py/object": "fcmlib.fcm.Concept",
+        "error": 0,
+        "inputMF": {
+            "py/object": "fcmlib.functions.piecewiselinear.PiecewiseLinear",
+            "piece": []
+        },
+        "name": "Turn",
+        "newError": 0,
+        "newValue": 0.5233780443647809,
+        "outputMF": {
+            "py/object": "fcmlib.functions.predefined.Predefined",
+            "equation": "90*x-45"
+        },
+        "relation": null,
+        "value": 0.5233780443647809
+    },
+    "__dict__": {
+        "config": {
+            "py/object": "fcmlib.config.Config",
+            "defaultInputMF": {
+                "py/type": "fcmlib.functions.piecewiselinear.PiecewiseLinear"
+            },
+            "defaultOutputMF": {
+                "py/type": "fcmlib.functions.piecewiselinear.PiecewiseLinear"
+            },
+            "defaultRelation": {
+                "py/type": "fcmlib.relations.threeterm.R3Term"
+            },
+            "functions": {
+                "py/repr": "fcmlib.functions/fcmlib.functions"
+            },
+            "relations": {
+                "py/repr": "fcmlib.relations/fcmlib.relations"
+            }
+        },
+        "name": "Controller",
+        "relations": {
+            "Acceleration": {
+                "py/object": "fcmlib.relations.threeterm.R3Term",
+                "a_values": [
+                    0.10590937788384114,
+                    0.5198953453303387
+                ],
+                "a_weights": [
+                    -0.3305396246228265,
+                    0.14928885562774652
+                ],
+                "a_window": 10,
+                "d_values": [
+                    0.15579025089434473,
+                    0.12539664560677188
+                ],
+                "d_weights": [
+                    -1.0,
+                    -1.0
+                ],
+                "p_values": [
+                    0.22139406675149553,
+                    0.6257073899564024
+                ],
+                "p_weights": [
+                    0.5219992318409831,
+                    -0.2540913735874135
+                ],
+                "previous": [
+                    {
+                        "py/id": 5
+                    },
+                    {
+                        "py/id": 19
+                    }
+                ],
+                "previousnames": [
+                    "Angle",
+                    "Distance"
+                ],
+                "weights": [
+                    [
+                        0.5219992318409831,
+                        -1.0,
+                        -0.3305396246228265
+                    ],
+                    [
+                        -0.2540913735874135,
+                        -1.0,
+                        0.14928885562774652
+                    ]
+                ]
+            },
+            "Angle": {
+                "py/object": "fcmlib.relations.threeterm.R3Term",
+                "a_values": [],
+                "a_weights": [],
+                "a_window": 10,
+                "d_values": [],
+                "d_weights": [],
+                "p_values": [],
+                "p_weights": [],
+                "previous": [],
+                "previousnames": [],
+                "weights": []
+            },
+            "Distance": {
+                "py/object": "fcmlib.relations.threeterm.R3Term",
+                "a_values": [],
+                "a_weights": [],
+                "a_window": 10,
+                "d_values": [],
+                "d_weights": [],
+                "p_values": [],
+                "p_weights": [],
+                "previous": [],
+                "previousnames": [],
+                "weights": []
+            },
+            "Turn": {
+                "py/object": "fcmlib.relations.threeterm.R3Term",
+                "a_values": [
+                    0.10590937788384114,
+                    0.5198953453303387
+                ],
+                "a_weights": [
+                    -0.8246043113704707,
+                    0.6428646102815143
+                ],
+                "a_window": 10,
+                "d_values": [
+                    0.15579025089434473,
+                    0.12539664560677188
+                ],
+                "d_weights": [
+                    -0.8793688013853077,
+                    -1.0
+                ],
+                "p_values": [
+                    0.22139406675149553,
+                    0.6257073899564024
+                ],
+                "p_weights": [
+                    -1.0,
+                    0.5281689575848979
+                ],
+                "previous": [
+                    {
+                        "py/id": 5
+                    },
+                    {
+                        "py/id": 19
+                    }
+                ],
+                "previousnames": [
+                    "Angle",
+                    "Distance"
+                ],
+                "weights": [
+                    [
+                        -1.0,
+                        -0.8793688013853077,
+                        -0.8246043113704707
+                    ],
+                    [
+                        0.5281689575848979,
+                        -1.0,
+                        0.6428646102815143
+                    ]
+                ]
+            }
+        }
+    }
+}

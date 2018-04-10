@@ -152,16 +152,16 @@ def DrawCar(screen, car, navigator = None, color=(0, 0, 255)):
         R_y = int(round(car.y_pos + 0.4 * screen.car_size * sin(radian)))
         DrawPolygon(screen,[[L_x,L_y], [R_x,R_y], [F_x,F_y]], color)
         if (navigator != None):
-            C_x = int(round(navigator.car.x_pos-11))
+            C_x = int(round(navigator.car.x_pos))
             C_y = int(round(navigator.car.y_pos))
             radian = navigator.car.direction*degree_to_radian
-            F_x = int(round(navigator.car.x_pos-11 + screen.car_size * cos(radian)))
+            F_x = int(round(navigator.car.x_pos + screen.car_size * cos(radian)))
             F_y = int(round(navigator.car.y_pos + screen.car_size * sin(radian)))
             radian = ((navigator.car.direction+90)%360) * degree_to_radian
-            L_x = int(round(navigator.car.x_pos-11 + 0.4 * screen.car_size * cos(radian)))
+            L_x = int(round(navigator.car.x_pos + 0.4 * screen.car_size * cos(radian)))
             L_y = int(round(navigator.car.y_pos + 0.4 * screen.car_size * sin(radian)))
             radian = ((navigator.car.direction+270)%360) * degree_to_radian
-            R_x = int(round(navigator.car.x_pos-11 + 0.4 * screen.car_size * cos(radian)))
+            R_x = int(round(navigator.car.x_pos + 0.4 * screen.car_size * cos(radian)))
             R_y = int(round(navigator.car.y_pos + 0.4 * screen.car_size * sin(radian)))
             DrawPolygon(screen,[[L_x,L_y], [R_x,R_y], [F_x,F_y]], color=[channel//2 for channel in color])
             next = navigator.next_gate
@@ -172,10 +172,13 @@ def DrawCar(screen, car, navigator = None, color=(0, 0, 255)):
             if abs(navigator.last_angle) > 10:
                 if L_dist < R_dist: DrawLine(screen, L_x, L_y, F_x, F_y, (255, 100, 100),3)
                 else: DrawLine(screen, R_x, R_y, F_x, F_y, (255, 100, 100),3)
-            if navigator.lost == True: color = (255, 0, 0)
-            else: color = (255, 255, 0)
-            DrawLine(screen, F_x, F_y, G_x, G_y, color)
-            DrawDot(screen, G_x, G_y, 3, color)
+            if navigator.lost == True:
+                color = (255, 0, 0)
+            else:
+                color = (255, 255, 0)
+            if navigator.finished == False:
+                DrawLine(screen, F_x, F_y, G_x, G_y, color)
+                DrawDot(screen, G_x, G_y, 3, color)
     elif screen.zoom_mode == 1:
         # Zoom mode draw (car is always in center of screen)     
         C_x = screen.surface.get_width()/2
@@ -201,10 +204,13 @@ def DrawCar(screen, car, navigator = None, color=(0, 0, 255)):
             if abs(navigator.last_angle) > 10:
                 if L_dist < R_dist: DrawLine(screen, L_x, L_y, F_x, F_y, (255, 100, 100),6)
                 else: DrawLine(screen, R_x, R_y, F_x, F_y, (255, 100, 100),6)
-            if navigator.lost == True: color = (255, 0, 0)
-            else: color = (255, 255, 0)
-            DrawLine(screen, F_x, F_y, G_x, G_y, color, 4)
-            DrawDot(screen, G_x, G_y, 6, color)
+            if navigator.lost == True:
+                color = (255, 0, 0)
+            else:
+                color = (255, 255, 0)
+            if navigator.finished == False:
+                DrawLine(screen, F_x, F_y, G_x, G_y, color, 4)
+                DrawDot(screen, G_x, G_y, 6, color)
     elif screen.zoom_mode == 2:
         # Zoom mode draw (resized track)
         C_x = int(round(car.x_pos*zoomout))
@@ -230,10 +236,13 @@ def DrawCar(screen, car, navigator = None, color=(0, 0, 255)):
             if abs(navigator.last_angle) > 10:
                 if L_dist < R_dist: DrawLine(screen, L_x, L_y, F_x, F_y, (255, 100, 100),1)
                 else: DrawLine(screen, R_x, R_y, F_x, F_y, (255, 100, 100),1)
-            if navigator.lost == True: color = (255, 0, 0)
-            else: color = (255, 255, 0)
-            DrawLine(screen, F_x, F_y, G_x, G_y, color, 1)
-            DrawDot(screen, G_x, G_y, 2, color)
+            if navigator.lost == True:
+                color = (255, 0, 0)
+            else:
+                color = (255, 255, 0)
+            if navigator.finished == False:
+                DrawLine(screen, F_x, F_y, G_x, G_y, color, 1)
+                DrawDot(screen, G_x, G_y, 2, color)
     else:
         raise ValueError('Error. Undefined zoom level.')
     
@@ -243,6 +252,7 @@ def DrawTrack(screen, track, car, navigator):
         # Normal mode draw
         if DrawTrack.surface_normal == None:
             DrawTrack.surface_normal = pygame.Surface(screen.surface.get_size())
+            DrawTrack.surface_normal.fill((255, 255, 255))
             image = LoadImage(track.mapfile)
             image = pygame.transform.scale(image, track.res)
             DrawTrack.surface_normal.blit(image, (0,0))
@@ -288,29 +298,27 @@ def DrawTrack(screen, track, car, navigator):
     elif screen.zoom_mode == 2:
         # Resized mode draw
         if DrawTrack.surface_resized == None:
-            width = screen.surface.get_width()
-            height = screen.surface.get_height()
-            DrawTrack.surface_resized = pygame.Surface((width, height))
+            DrawTrack.surface_resized = pygame.Surface(screen.surface.get_size())
             DrawTrack.surface_resized.fill((255, 255, 255))
-            count = len(track.gate)
-            for current in range(0,count-1):
-                next = current + 1
-                x1 = int(round(zoomout*track.gate[current].left_x))
-                y1 = int(round(zoomout*track.gate[current].left_y))
-                x2 = int(round(zoomout*track.gate[next].left_x))
-                y2 = int(round(zoomout*track.gate[next].left_y))
-                pygame.draw.aaline(DrawTrack.surface_resized, (255, 0, 0), (x1, y1), (x2, y2))
-                x1 = int(round(zoomout*track.gate[current].right_x))
-                y1 = int(round(zoomout*track.gate[current].right_y))
-                x2 = int(round(zoomout*track.gate[next].right_x))
-                y2 = int(round(zoomout*track.gate[next].right_y))
-                pygame.draw.aaline(DrawTrack.surface_resized, (255, 0, 0), (x1, y1), (x2, y2))
-            x1 = int(round(zoomout*track.gate[navigator.start_gate].left_x))
-            y1 = int(round(zoomout*track.gate[navigator.start_gate].left_y))
-            x2 = int(round(zoomout*track.gate[navigator.start_gate].right_x))
-            y2 = int(round(zoomout*track.gate[navigator.start_gate].right_y))
-            pygame.draw.line(DrawTrack.surface_resized, (0, 255, 0), (x1, y1), (x2, y2),2)
-        screen.surface.blit(DrawTrack.surface_resized,(0, 0))
+            image = LoadImage(track.mapfile)
+            image = pygame.transform.scale(image, screen.surface.get_size())
+            DrawTrack.surface_resized.blit(image, (0,0))
+            for point in track.point:
+                x = int(zoomout*point.x)
+                y = int(zoomout*point.y)
+                pygame.draw.circle(DrawTrack.surface_resized, (0,180,0), (x,y), 2)
+            for cam in track.cams:
+                x1 = int(zoomout*cam[0])
+                y1 = int(zoomout*cam[1])
+                x2 = int(zoomout*cam[2])
+                y2 = int(zoomout*cam[3])
+                x3 = int(zoomout*cam[4])
+                y3 = int(zoomout*cam[5])
+                pygame.draw.circle(DrawTrack.surface_resized, (255,0,0), (x1,y1), 2)
+                pygame.draw.aaline(DrawTrack.surface_resized, (255, 0, 0), (x1,y1), (x2,y2))
+                pygame.draw.aaline(DrawTrack.surface_resized, (255, 0, 0), (x1,y1), (x3,y3))
+                pygame.draw.aaline(DrawTrack.surface_resized, (255, 255, 0), (x2,y2), (x3,y3))
+        screen.surface.blit(DrawTrack.surface_resized,(0,0))
     else:
         raise ValueError('Error. Undefined zoom level.')
 
@@ -365,17 +373,17 @@ def DrawTrajectory(screen, simulator, statistics, results):
     font = pygame.font.SysFont("Courier",10)
     string = 'STATISTICS:'
     screen.surface.blit(font.render(string, True, (0,0,0)), (10,screen.surface.get_height() - 80))
-    string = 'AVG Speed: ' + str(results.avg_speed) + ' m/s'
+    string = 'AVG Speed: ' + str(results.avg_speed) + ' px/s'
     screen.surface.blit(font.render(string, True, (0,0,0)), (10,screen.surface.get_height() - 70))
-    string = 'AVG Acc:   ' + str(results.avg_acc) + ' m/s^2'
+    string = 'AVG Acc:   ' + str(results.avg_acc) + ' px/s^2'
     screen.surface.blit(font.render(string, True, (0,0,0)), (10,screen.surface.get_height() - 60))
     string = 'AVG Turn:  ' + str(results.avg_turn) + ' degrees'
     screen.surface.blit(font.render(string, True, (0,0,0)), (10,screen.surface.get_height() - 50))
     string = 'Runtime:   ' + str(results.time) + ' sec'
     screen.surface.blit(font.render(string, True, (0,0,0)), (10,screen.surface.get_height() - 40))
-    string = 'Distance:  ' + str(results.distance) + ' m'
+    string = 'Distance:  ' + str(results.distance) + ' px'
     screen.surface.blit(font.render(string, True, (0,0,0)), (10,screen.surface.get_height() - 30))
-    string = 'Remaining: ' + str(results.remaining) + ' m'
+    string = 'Remaining: ' + str(results.remaining) + ' px'
     screen.surface.blit(font.render(string, True, (0,0,0)), (10,screen.surface.get_height() - 20))
 
 def ShowInfo(screen,string,pos=None,fontsize=20,color=(0,0,0)):

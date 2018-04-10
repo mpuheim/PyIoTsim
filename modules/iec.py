@@ -63,12 +63,8 @@ def saveFenotype(individual,folder):
     filename = folder + '/Individual-ID'+str(individual.id)+'.txt'
     makedir(folder)
     with open(filename, 'w') as f:
-        f.write('Fenotype of individual ID:' + str(individual.id))
-        mat = individual.fenotype.matrix
-        for x in range(len(mat)):
-            f.write('\n|')
-            for y in range(len(mat[0])):
-                f.write(str(mat[x][y])+'|')
+        s = individual.fenotype.map.serialize()
+        f.write(s)
 
 def saveStats(individual,folder):
     filename = folder + '/Individual-ID'+str(individual.id)+'.txt'

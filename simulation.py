@@ -8,7 +8,7 @@ from modules.utils import struct
 from modules.config import res,simstep
 
 # init track
-track = simulation.Track("default.track")
+track = simulation.Track("tracks/default.track")
 # init gui screen
 screen = gui.Init(res)
 # set initial car position
@@ -21,13 +21,14 @@ car = simulation.Car(x_pos=x, y_pos=y, direction=angle)
 # init navigator
 navdist = 30
 stopdist = 100
-navigator = simulation.Navigator(track, car, start, navdist, stopdist)
+detector = simulation.Detector("models",track.cams)
+navigator = simulation.Navigator(track, detector, car, start, navdist, stopdist)
 # init controller
 controller = simulation.SimpleController()
 # init timer
 timer = simulation.Timer()
 # init simulator
-simulator = simulation.Simulator(track, car, navigator, controller, timer)
+simulator = simulation.Simulator(track, car, detector, navigator, controller, timer)
 # run control loop
 run = 1
 while (run):
@@ -38,7 +39,7 @@ while (run):
     # reset simulator on finish
     if navigator.lost or navigator.finished:
         car = simulation.Car(x_pos=x, y_pos=y, direction=angle)
-        navigator = simulation.Navigator(track, car, start, navdist, stopdist)
+        navigator = simulation.Navigator(track, detector, car, start, navdist, stopdist)
         controller = simulation.SimpleController()
         timer = simulation.Timer()
-        simulator = simulation.Simulator(track, car, navigator, controller, timer)
+        simulator = simulation.Simulator(track, car, detector, navigator, controller, timer)

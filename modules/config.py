@@ -3,8 +3,8 @@
 #---CONFIGURATION-FILE---#
 
 res = (500,500) # screen resolution
-simstep = 0.02 # basic simulation step in seconds
-deffile = "default.track" # default track file
+simstep = 0.1 # basic simulation step in seconds
+deffile = "tracks/default.track" # default track file
 zoomin = 4 # zoom in parameter
 zoomout = 0.7 # zoom out parameter
 

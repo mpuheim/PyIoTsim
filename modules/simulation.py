@@ -1,6 +1,7 @@
 ﻿# This Python file uses the following encoding: utf-8
 
 import sys, os, time
+import fcmlib
 from math import sin, cos, tan, acos, atan, sqrt, isnan
 from modules.config import res, deffile, simstep
 from modules.utils import struct
@@ -51,7 +52,6 @@ class Track():
     def __init__(self,filename = None):
         # Try to load track
         if filename != None:
-            filename = os.path.normpath(os.getcwd() + "/tracks/" + filename)
             try:
                 self.loadFromFile(filename)
             except:
@@ -59,7 +59,7 @@ class Track():
                 filename = None
         # Use default track if none was provided
         if filename == None:
-            filename = os.path.normpath(os.getcwd() + "/tracks/" + deffile)
+            filename = deffile
             try:
                 self.loadFromFile(filename)
             except:
@@ -151,12 +151,57 @@ class Track():
         self.length = 0
         for i in range(len(self.gate)):
             self.length += self.getGateDistance(i,i+1)
+            
+class Detector():
+    # Camera (detector) class
+    def __init__(self,directory,cams):
+        self.cams=cams
+        self.models=[]
+        for file in os.listdir(directory):
+            with open(os.path.join(directory,file),"r",encoding="utf8") as f:
+                model=f.read()
+            model=fcmlib.FCM(model)
+            self.models.append(model)
+    def sign(self,p1,p2,p3):
+        return (p1[0] - p3[0]) * (p2[1] - p3[1]) - (p2[0] - p3[0]) * (p1[1] - p3[1])
+    def oncam (self,pt,v1,v2,v3):
+        b1 = self.sign(pt, v1, v2) < 0.01
+        b2 = self.sign(pt, v2, v3) < 0.01
+        b3 = self.sign(pt, v3, v1) < 0.01
+        if (b1 == b2) and (b2 == b3): return 1
+        else: return 0
+    def detect(self,car):
+        rx = car.x_pos
+        ry = car.y_pos
+        detections=[]
+        for cam, model in zip(self.cams,self.models):
+            #detect on camera
+            detection=self.oncam((rx,ry),(cam[0],cam[1]),(cam[2],cam[3]),(cam[4],cam[5]))        
+            #fuzzyfi inputs
+            model["CamX"] = model["CamX"].inputMF.evaluate(rx)
+            model["CamY"] = model["CamY"].inputMF.evaluate(ry)
+            model["Detection"] = model["Detection"].inputMF.evaluate(detection)
+            #produce outputs
+            model.update()
+            #get outputs
+            dx = model["OutputX"].value
+            dy = model["OutputY"].value
+            dd = model["Confidence"].value
+            x = model["OutputX"].outputMF.evaluate(dx)
+            y = model["OutputY"].outputMF.evaluate(dy)
+            d = model["Confidence"].outputMF.evaluate(dd)
+            detections.append([d,x,y])
+        detections.sort()
+        detections.reverse()
+        #print(detections)
+        return [detections[0][1],detections[0][2],car.direction]
 
 class Navigator():
     # Car navigator class (goalsetter)
-    def __init__(self, track, car, start_gate = 0, switch_distance = 0, stop_distance = 10):
+    def __init__(self, track, detector, car, start_gate = 0, switch_distance = 0, stop_distance = 10):
         self.track = track
         self.car = car
+        self.detector = detector
         self.start_gate = start_gate
         self.previous_gate = start_gate
         self.next_gate = start_gate + 1
@@ -171,27 +216,27 @@ class Navigator():
     # Navigate car to next goal
     def navigate(self):  #return [goal_distance, goal_angle]
         # car position
-        A_x = self.car.x_pos
-        A_y = self.car.y_pos
+        A_x, A_y, direction = self.detector.detect(self.car)
         # car front position
-        radian = self.car.direction*degree_to_radian
-        B_x = self.car.x_pos + 10 * cos(radian)
-        B_y = self.car.y_pos + 10 * sin(radian)
+        radian = direction*degree_to_radian
+        B_x = A_x + 10 * cos(radian)
+        B_y = A_y + 10 * sin(radian)
         # next gate
         gate = self.next_gate
         # get distance to the gate
         dist = pointToPointDist(A_x,A_y,self.track.point[gate].x,self.track.point[gate].y)
-        # check track completion
-        if self.passed_gates > len(self.track.gate)+(1+int(self.switch_distance/dist)):
-            self.finished = True
         # if distance to gate is small, go to the following gate
         while dist <= self.switch_distance:
             self.next_gate = (self.next_gate + 1)%(len(self.track.gate))
             gate = self.next_gate
             self.passed_gates += 1
             dist = pointToPointDist(A_x,A_y,self.track.point[gate].x,self.track.point[gate].y)
-        # if distance is large, set stop signal
-        if dist > self.stop_distance:
+        # check track completion
+        if self.passed_gates >= len(self.track.gate)-2:
+            self.finished = True
+        # if real distance is large, set stop signal
+        real_dist = pointToPointDist(self.car.x_pos,self.car.y_pos,self.track.point[gate].x,self.track.point[gate].y)
+        if real_dist > self.stop_distance and self.finished == False:
             self.lost = True
         # goal position
         C_x = self.track.point[gate].x
@@ -209,13 +254,13 @@ class Navigator():
             print("Setting angle to the last known computed value ("+str(self.last_angle)+").")
             angle = self.last_angle
         # determine on which side the goal is (left/right)
-        radian = ((self.car.direction+90)%360) * degree_to_radian
-        L_x = self.car.x_pos + 10 * cos(radian)
-        L_y = self.car.y_pos + 10 * sin(radian)
+        radian = ((direction+90)%360) * degree_to_radian
+        L_x = A_x + 10 * cos(radian)
+        L_y = A_y + 10 * sin(radian)
         L_dist = pointToPointDist(C_x,C_y,L_x,L_y)
-        radian = ((self.car.direction+270)%360) * degree_to_radian
-        R_x = self.car.x_pos + 10 * cos(radian)
-        R_y = self.car.y_pos + 10 * sin(radian)
+        radian = ((direction+270)%360) * degree_to_radian
+        R_x = A_x + 10 * cos(radian)
+        R_y = A_y + 10 * sin(radian)
         R_dist = pointToPointDist(C_x,C_y,R_x,R_y)
         if (L_dist < R_dist): angle = -angle
         # store and return last values
@@ -232,8 +277,7 @@ class Navigator():
         # gate count
         gate_count = len(self.track.point)
         # car position
-        A_x = self.car.x_pos
-        A_y = self.car.y_pos
+        A_x, A_y, direction = self.detector.detect(self.car)
         # get distance to the next gate
         dist = pointToPointDist(A_x,A_y,self.track.point[current].x,self.track.point[current].y)
         # add distance to finish
@@ -359,9 +403,10 @@ class SimpleController():
 
 class Simulator():
     # Simulator class
-    def __init__(self, track, car, navigator, controller, timer):
+    def __init__(self, track, car, detector, navigator, controller, timer):
         self.track = track
         self.car = car
+        self.detector = detector
         self.navigator = navigator
         self.controller = controller
         self.timer = timer

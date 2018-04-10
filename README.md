@@ -16,5 +16,5 @@ Short scripts description:
 - setupmap.py - create environment with cameras  
 - simulation.py - run offline simulation with simple rule based controller  
 - traincams.py - train camera models implemented using fcmlib neuro-fuzzy relations  
-- ???.py - train robot controller implemented using fcmlib three-term relations  
+- traincontroller.py - train robot controller implemented using fcmlib three-term relations  
 - ???.py - run simulation online using fcmlib webapi

@@ -1,8 +1,6 @@
-train - numpy support
 
-
-- simulation objects: cams, navigator, robot
-- run offline
+offline training objects:
+- update fcm controller to use fcmlib (R3Term relations)
 
 - online maps: cams, navigator, robot
 
