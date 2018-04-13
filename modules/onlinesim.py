@@ -159,7 +159,7 @@ class Detector():
         self.cams=cams
         self.names=[]
         self.server=server
-        self.request=requests.Communicator(workers=100)
+        self.request=requests.Communicator(workers=10)
         print("Camera initialization")
         for file in os.listdir(directory):
             #load model from file

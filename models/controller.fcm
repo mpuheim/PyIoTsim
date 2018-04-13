@@ -183,28 +183,28 @@
         "relations": {
             "Acceleration": {
                 "py/object": "fcmlib.relations.threeterm.R3Term",
-                "a_values": [
+                "avalues": [
                     0.10590937788384114,
                     0.5198953453303387
                 ],
-                "a_weights": [
+                "aweights": [
                     -0.3305396246228265,
                     0.14928885562774652
                 ],
-                "a_window": 10,
-                "d_values": [
+                "awindow": 10,
+                "dvalues": [
                     0.15579025089434473,
                     0.12539664560677188
                 ],
-                "d_weights": [
+                "dweights": [
                     -1.0,
                     -1.0
                 ],
-                "p_values": [
+                "pvalues": [
                     0.22139406675149553,
                     0.6257073899564024
                 ],
-                "p_weights": [
+                "pweights": [
                     0.5219992318409831,
                     -0.2540913735874135
                 ],
@@ -235,54 +235,54 @@
             },
             "Angle": {
                 "py/object": "fcmlib.relations.threeterm.R3Term",
-                "a_values": [],
-                "a_weights": [],
-                "a_window": 10,
-                "d_values": [],
-                "d_weights": [],
-                "p_values": [],
-                "p_weights": [],
+                "avalues": [],
+                "aweights": [],
+                "awindow": 10,
+                "dvalues": [],
+                "dweights": [],
+                "pvalues": [],
+                "pweights": [],
                 "previous": [],
                 "previousnames": [],
                 "weights": []
             },
             "Distance": {
                 "py/object": "fcmlib.relations.threeterm.R3Term",
-                "a_values": [],
-                "a_weights": [],
-                "a_window": 10,
-                "d_values": [],
-                "d_weights": [],
-                "p_values": [],
-                "p_weights": [],
+                "avalues": [],
+                "aweights": [],
+                "awindow": 10,
+                "dvalues": [],
+                "dweights": [],
+                "pvalues": [],
+                "pweights": [],
                 "previous": [],
                 "previousnames": [],
                 "weights": []
             },
             "Turn": {
                 "py/object": "fcmlib.relations.threeterm.R3Term",
-                "a_values": [
+                "avalues": [
                     0.10590937788384114,
                     0.5198953453303387
                 ],
-                "a_weights": [
+                "aweights": [
                     -0.8246043113704707,
                     0.6428646102815143
                 ],
-                "a_window": 10,
-                "d_values": [
+                "awindow": 10,
+                "dvalues": [
                     0.15579025089434473,
                     0.12539664560677188
                 ],
-                "d_weights": [
+                "dweights": [
                     -0.8793688013853077,
                     -1.0
                 ],
-                "p_values": [
+                "pvalues": [
                     0.22139406675149553,
                     0.6257073899564024
                 ],
-                "p_weights": [
+                "pweights": [
                     -1.0,
                     0.5281689575848979
                 ],

@@ -1,51 +1,51 @@
 import fcmlib
+from modules import requests
 
 class FCMcontroller():
 
     # FCM controller class
-    def __init__(self, map, server):
-        self.map = None #init from url
+    def __init__(self, modeldir, server):
+        self.server=server
+        self.request=requests.Communicator(workers=10)
+        print("FCM controller initialization")
+        with open(modeldir,"r",encoding="utf8") as f:
+            #load model from file
+            model=f.read()
+            map=fcmlib.FCM(model)
+            model=map.serialize(indent=0)
+            name=map.name
+            #register model on server
+            print("- Registering "+name+" on server "+server)
+            url=server+name+"/login/"
+            f=self.request.post(url)
+            f.result()
+            #upload model
+            url=server+name+"/run/"
+            cmd=name+".deserialize('"+model+"')"
+            f=self.request.post(url,data = {'command':cmd})
+            f.result()
+            #set model name
+            self.map=name
 
     # Control method
     def control(self, distance, angle): #return [acceleration, turn]
+        url = self.server+self.map+"/run/"
         # activations of input concepts
-        self.map["Angle"] = self.map["Angle"].inputMF.evaluate(angle)
-        self.map["Distance"] = self.map["Distance"].inputMF.evaluate(distance)
-        # activations of output concepts
-        self.map.update()
-        # return outputs
-        acceleration = self.map["Acceleration"].value
-        acceleration = self.map["Acceleration"].outputMF.evaluate(acceleration)
-        turn = self.map["Turn"].value
-        turn = self.map["Turn"].outputMF.evaluate(turn)
-        #print('input = ' + str(distance) + ' ' + str(angle))
-        #print('output = ' + str(acceleration) + ' ' + str(turn))
+        cmd = self.map+'["Angle"] = '+self.map+'["Angle"].inputMF.evaluate('+str(angle)+')'
+        self.request.post(url,data = {'command':cmd})
+        cmd = self.map+'["Distance"] = '+self.map+'["Distance"].inputMF.evaluate('+str(distance)+')'
+        self.request.post(url,data = {'command':cmd})
+        # update activations of output concepts
+        cmd = self.map+'.update()'
+        f=self.request.post(url,data = {'command':cmd})
+        f.result()
+        # process outputs
+        cmd = self.map+'["Acceleration"].outputMF.evaluate('+self.map+'["Acceleration"].value)'
+        fa = self.request.post(url,data = {'command':cmd})
+        cmd = self.map+'["Turn"].outputMF.evaluate('+self.map+'["Turn"].value)'
+        fv = self.request.post(url,data = {'command':cmd})
+        # get outputs
+        acceleration = float(fa.result().text)
+        turn = float(fv.result().text)
         return [acceleration,turn]
-
-def _initMapTemplate():
-    #create model
-    map = fcmlib.FCM()
-    map.name = "Controller"
-    #set default relation
-    map.config.defaultRelation = fcmlib.relations.R3Term
-    #add & connect concepts
-    for inputs in ["Angle","Distance"]:
-        for outputs in ["Turn","Acceleration"]:
-            map.connect(inputs,outputs)
-    #initialize membership functions
-    for inputs in ["Angle","Distance"]:
-        map[inputs].inputMF = fcmlib.functions.PiecewiseLinear()
-    for outputs in ["Turn","Acceleration"]:
-        map[outputs].outputMF = fcmlib.functions.Predefined()
-    #set concept membership functions
-    map["Angle"].inputMF.set("-91:0 -90:0 90:1 91:1")
-    map["Distance"].inputMF.set("-1:0 0:0 40:1 41:1")
-    map["Turn"].outputMF.set("90*x-45")
-    map["Acceleration"].outputMF.set("20*(x-0.5)")
-    #check proper serialization
-    s = map.serialize()
-    m = fcmlib.FCM(s)
-    #return template
-    return m.serialize()
-
     

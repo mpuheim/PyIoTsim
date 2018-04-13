@@ -3,8 +3,9 @@
 
 from modules import gui
 from modules import onlinesim as simulation
+from modules import onlinefcm as fcm
 
-# set online FCMs URLS
+# set online FCMs server
 server = "http://127.0.0.1:5000/"
 # init track
 track = simulation.Track("tracks/default.track")
@@ -21,7 +22,7 @@ stopdist = 100
 detector = simulation.Detector("models/cams",track.cams,server)
 navigator = simulation.Navigator(track, detector, car, start, navdist, stopdist)
 # init controller
-controller = simulation.SimpleController()
+controller = fcm.FCMcontroller("models/controller.fcm",server)
 # init timer
 timer = simulation.Timer()
 # init simulator
@@ -39,6 +40,6 @@ while (run):
     if navigator.lost or navigator.finished:
         car = simulation.Car(x_pos=x, y_pos=y, direction=angle)
         navigator = simulation.Navigator(track, detector, car, start, navdist, stopdist)
-        controller = simulation.SimpleController()
+        controller = fcm.FCMcontroller("models/controller.fcm",server)
         timer = simulation.Timer()
         simulator = simulation.Simulator(track, car, detector, navigator, controller, timer)
