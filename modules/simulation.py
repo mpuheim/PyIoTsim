@@ -382,22 +382,22 @@ class SimpleController():
         trn = 0
         acc = 0
         #if target is in front speedup
-        if abs(angle) < 5:
-            acc += 5
+        if abs(angle) < 15:
+            acc += 3
         #if target is back and far, turn to it
         elif abs(angle) > 150 and distance > 30:
             trn = 90
         #if target is on left, turn to it
         if angle < -5:
-            trn = 20
-            acc -=5
+            trn = 8
+            acc -=2
         #if target is on right, turn to it
         elif angle > 5:
-            trn = -20
-            acc -= 5
+            trn = -8
+            acc -= 2
         #if target is much left or right, slow down
         if abs(angle) > 50 and abs(angle) <= 150:
-            acc -=10
+            acc -=5
         # return controlled values
         return [acc, trn]
 
